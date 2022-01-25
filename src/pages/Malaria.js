@@ -1,21 +1,23 @@
+import { Link as RouterLink } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import plusFill from '@iconify/icons-eva/plus-fill';
-import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Button, Container, Stack, Typography } from '@mui/material';
+import { Container, Stack, Typography, Button } from '@mui/material';
 // components
-
-import FileUpload from '../components/FileUpload';
 import Page from '../components/Page';
+import FileUpload from '../components/FileUpload';
 
-export default function Covid19() {
+// ----------------------------------------------------------------------
+
+export default function Malaria() {
   return (
-    <Page title="Covid19">
+    <Page title="Malaria">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Covid19 Model
+            Malaria Model
           </Typography>
+
           <Button variant="contained" component={RouterLink} to="#">
             Make Prediction
           </Button>
