@@ -1,15 +1,23 @@
-import { Link as RouterLink } from 'react-router-dom';
-import { Icon } from '@iconify/react';
-import plusFill from '@iconify/icons-eva/plus-fill';
 // material
 import { Container, Stack, Typography, Button } from '@mui/material';
-// components
+
+import React, { useState } from 'react';
+
 import Page from '../components/Page';
 import FileUpload from '../components/FileUpload';
 
 // ----------------------------------------------------------------------
 
 export default function Malaria() {
+  const [data, setFile] = useState({
+    file: ''
+  });
+
+  const passData = (data) => {
+    setFile(data);
+    console.log(data);
+  };
+
   return (
     <Page title="Malaria">
       <Container>
@@ -17,12 +25,8 @@ export default function Malaria() {
           <Typography variant="h4" gutterBottom>
             Malaria Model
           </Typography>
-
-          <Button variant="contained" component={RouterLink} to="#">
-            Make Prediction
-          </Button>
         </Stack>
-        <FileUpload />
+        <FileUpload passData={passData} />
       </Container>
     </Page>
   );

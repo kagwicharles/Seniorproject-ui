@@ -1,14 +1,20 @@
-import { Icon } from '@iconify/react';
-import plusFill from '@iconify/icons-eva/plus-fill';
-import { Link as RouterLink } from 'react-router-dom';
-
 // material
 import { Stack, Button, Container, Typography, Box } from '@mui/material';
 
+import React, { useState } from 'react';
 import FileUpload from '../components/FileUpload';
 import Page from '../components/Page';
 
 export default function Pneumonia() {
+  const [data, setFile] = useState({
+    file: ''
+  });
+
+  const passData = (data) => {
+    setFile(data);
+    console.log(data);
+  };
+
   return (
     <Page title="Pneumonia">
       <Container>
@@ -16,11 +22,8 @@ export default function Pneumonia() {
           <Typography variant="h4" gutterBottom>
             Pneumonia Model
           </Typography>
-          <Button variant="contained" component={RouterLink} to="#">
-            Make Prediction
-          </Button>
         </Stack>
-        <FileUpload />
+        <FileUpload passData={passData} />
       </Container>
     </Page>
   );

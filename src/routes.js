@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import DashboardApp from './pages/DashboardApp';
 import Malaria from './pages/Malaria';
-import Blog from './pages/Blog';
+import Covid19 from './pages/Covid19';
 import Pneumonia from './pages/Pneumonia';
 import NotFound from './pages/Page404';
 
@@ -23,7 +23,7 @@ export default function Router() {
         { path: 'app', element: <DashboardApp /> },
         { path: 'pneumonia', element: <Pneumonia /> },
         { path: 'malaria', element: <Malaria /> },
-        { path: 'covid19', element: <Blog /> }
+        { path: 'covid19', element: <Covid19 /> }
       ]
     },
     {

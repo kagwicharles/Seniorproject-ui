@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { Stack, Box } from '@mui/material';
+import TypeAnimation from 'react-type-animation';
+
+import { Stack, Box, Button, Grid } from '@mui/material';
+import { performDiagnosis } from '../services/ModelService';
 
 class FileUpload extends React.Component {
   constructor(props) {
@@ -12,6 +15,7 @@ class FileUpload extends React.Component {
     e.preventDefault();
     // TODO: do something with -> this.state.file
     console.log('handle uploading-', this.state.file);
+    performDiagnosis(this.state.file);
   }
 
   _handleImageChange(e) {
@@ -26,8 +30,8 @@ class FileUpload extends React.Component {
         imagePreviewUrl: reader.result
       });
     };
-
     reader.readAsDataURL(file);
+    this.props.passData(file);
   }
 
   render() {
@@ -36,18 +40,46 @@ class FileUpload extends React.Component {
     if (imagePreviewUrl) {
       $imagePreview = <img src={imagePreviewUrl} alt="Diagnosis" />;
     } else {
-      $imagePreview = <div className="previewText">Select an X-Ray Image to diagnose</div>;
+      $imagePreview = (
+        <div className="previewText">
+          <TypeAnimation
+            sequence={['Select an X-Ray Image to diagnose']}
+            wrapper="p"
+            repeat={3}
+            cursor={false}
+          />
+        </div>
+      );
     }
 
     return (
       <div className="previewComponent">
-        <Stack spacing={2}>
-          <Box sx={{ width: '50%', height: '50%' }}>
-            <div className="imgPreview">{$imagePreview}</div>
-          </Box>
-          <form onSubmit={(e) => this._handleSubmit(e)}>
-            <input className="fileInput" type="file" onChange={(e) => this._handleImageChange(e)} />
-          </form>
+        <Stack>
+          <p id="notification-area" className="p-2 rounded" />
+          <Grid container spacing={4}>
+            <Grid item xs={8}>
+              <Box>
+                <div className="imgPreview">{$imagePreview}</div>
+              </Box>
+            </Grid>
+            <Grid item xs={4}>
+              <form onSubmit={(e) => this._handleSubmit(e)} encType="multipart/form-data">
+                <Stack spacing={4}>
+                  <input
+                    className="fileInput"
+                    type="file"
+                    name="myfile"
+                    onChange={(e) => this._handleImageChange(e)}
+                  />
+                  <Box>
+                    <Button variant="contained" type="submit">
+                      Predict
+                    </Button>
+                  </Box>
+                </Stack>
+              </form>
+            </Grid>
+          </Grid>
         </Stack>
       </div>
     );
